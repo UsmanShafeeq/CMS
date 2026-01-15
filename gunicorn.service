@@ -1,0 +1,45 @@
+[Unit]
+Description=gunicorn daemon for Django myproject
+Documentation=https://gunicorn.org/
+After=network.target postgresql.service
+
+Requires=gunicorn.socket
+PartOf=gunicorn.socket
+
+[Service]
+Type=notify
+User=appuser
+Group=www-data
+WorkingDirectory=/home/appuser/myproject/backend
+
+# Environment variables from .env file
+EnvironmentFile=/home/appuser/myproject/.env
+
+# Python virtual environment
+Environment="PATH=/home/appuser/venv/bin"
+ExecStart=/home/appuser/venv/bin/gunicorn \
+    --workers 4 \
+    --worker-class sync \
+    --worker-tmp-dir /dev/shm \
+    --timeout 120 \
+    --bind unix:/run/gunicorn.sock \
+    --access-logfile /home/appuser/logs/gunicorn_access.log \
+    --error-logfile /home/appuser/logs/gunicorn_error.log \
+    --log-level info \
+    backend.wsgi:application
+
+# Process supervision
+Restart=on-failure
+RestartSec=5s
+
+# Security
+PrivateTmp=true
+NoNewPrivileges=true
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=gunicorn
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,13 @@
+[Unit]
+Description=gunicorn socket for Django myproject
+Before=gunicorn.service
+
+[Socket]
+ListenStream=127.0.0.1:8000
+ListenStream=[::1]:8000
+ListenStream=/run/gunicorn.sock
+
+Accept=false
+
+[Install]
+WantedBy=sockets.target
