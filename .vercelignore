@@ -1,0 +1,78 @@
+# Dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+.pnpm-debug.log
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# Development
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Backend (Django)
+backend/
+*.py
+*.pyc
+__pycache__/
+*.sqlite3
+db.sqlite3
+venv/
+env/
+.venv
+
+# Git
+.git/
+.gitignore
+
+# Logs
+logs/
+*.log
+
+# Media and static files (can be served via CDN)
+media/
+static/
+staticfiles/
+
+# Testing
+coverage/
+.coverage
+.pytest_cache/
+
+# Docker
+Dockerfile
+docker-compose.yml
+
+# Documentation
+docs/
+*.md
+!README.md
+
+# Config
+.env.example
+.eslintignore
+.prettierignore
+
+# OS files
+Thumbs.db
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Package manager files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
